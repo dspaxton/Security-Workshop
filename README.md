@@ -18,10 +18,11 @@ The CloudFormation template also includes a set of servers for use to simulate a
 * [Scenario 1 – Compromised EC2 Instance](#attack1) 
 * [Scenario 2 – Compromised IAM Credentials](#attack2)
 * [Scenario 3 – IAM Role Credential Exfiltration](#attack3)
+* [Scenario 4 - Building CloudWatch Alarms](#attack4)
 * [Summary](#summary)
 * [Clean Up](#cleanup)
 
-> All of the links assume you are using the **eu-west-2 (Oregon)** region.
+> All of the links assume you are using the **eu-west-2 (London)** region.
 
 ## Getting Started – Just Two Clicks <a name="started"/>
 
