@@ -67,7 +67,13 @@ Follow the instructions [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGui
 
 ## Deploy the environment <a name="deploy"/> </a> 
 
-To initiate the scenarios and begin generating GuardDuty findings run the provided CloudFormation template.
+
+To initiate the scenarios and begin generating GuardDuty findings run the provided CloudFormation template either by clicking on the link below or uploading the CloudFormation template. 
+
+Region| Deploy
+------|-----
+EU West 2 (London) | [![Deploy CFN Template in eu-west-2](./images/deploy-to-aws.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/new?stackName=Security-Workshop&templateURL=https://s3.eu-west-2.amazonaws.com/paxtonlabs.com/Security-Workshop.yaml)
+
 
 Navigate to the CloudFormation console for your preferred region
 
