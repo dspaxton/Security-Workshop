@@ -6,7 +6,7 @@ Parameters:
   
   ResourceName:
     Type: String
-    Default: GuardDuty-Example
+    Default: Security-Workshop
     AllowedValues: 
       - Security-Workshop
     Description: Prefix for the resources that are created.
