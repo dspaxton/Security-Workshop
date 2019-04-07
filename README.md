@@ -96,14 +96,18 @@ The initial findings will begin to show up in GuardDuty 10 minutes after the Clo
 
 The CloudFormation template will create the following resources:
 
-  * Three [Amazon EC2](https://aws.amazon.com/ec2/) Instances (and supporting network infrastructure)
+  * Six [Amazon EC2](https://aws.amazon.com/ec2/) Instances (and supporting network infrastructure)
     * Two Instances that contain the name “*Compromised Instance*”
+    * Two Instances that contain the name "*SecureServer*"
     * One instance that contains the name “*Malicious Instance*”
-  * [AWS IAM Role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) For EC2 which will have permissions to SSM Parameter Store and DynamoDB
-  * One [Amazon SNS Topic](https://docs.aws.amazon.com/sns/latest/dg/GettingStarted.html) so you will be able to receive notifications
+    * One instance that contains the name "*ControlServer*"
+  * [AWS IAM Roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) For EC2 which will have permissions to SSM Parameter Store, DynamoDB & CloudWatch Logs
+  * Two [Amazon SNS Topics](https://docs.aws.amazon.com/sns/latest/dg/GettingStarted.html) so you will be able to receive notifications from both Guard Duty and AWS Config
   * Three [AWS CloudWatch Event](https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html) rules for triggering the appropriate notification or remediation
   * Two [AWS Lambda](https://aws.amazon.com/lambda/) functions that will be used for remediating findings and will have permissions to modify Security Groups and revoke active IAM Role sessions (on only the IAM Role associated with this scenario)
-  * [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html) value for storing a fake database password.
+  * [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html) value for storing a fake database password and IP addresses of the Secure Servers.
+  * AWS CloudWatch Log Agent Configurations that will be deployed to the servers. 
+  * AWS Config Rules that look for breaches of restricted-ssh and encrypted-volume rules.
 
 > Make sure the CloudFormation stack is in a **CREATE_COMPLETE** status before moving on.
 
@@ -123,7 +127,7 @@ To simulate this last and final attack you will need to retrieve the IAM tempora
 4.  Run the following command in the shell::
 
     ```
-    curl http://169.254.169.254/latest/meta-data/iam/security-credentials/GuardDuty-Example-EC2-Compromised
+    curl http://169.254.169.254/latest/meta-data/iam/security-credentials/Security-Workshop-EC2-Compromised
     ```
 5. Make note of the **AccessKeyID**, **SecretAccessKey**, and **Token**.
 

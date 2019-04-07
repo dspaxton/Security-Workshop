@@ -1116,6 +1116,7 @@ Resources:
             echo "*/10 * * * * /usr/local/bin/webstress.sh">> /var/spool/cron/ec2-user
             echo "@reboot /usr/local/bin/webnormal.sh">> /var/spool/cron/ec2-user
             chown ec2-user:ec2-user /var/spool/cron/ec2-user
+            reboot
 
 
             
