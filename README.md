@@ -121,7 +121,7 @@ To simulate this last and final attack you will need to retrieve the IAM tempora
 
 1.  Go to [Managed Instances](https://eu-west-2.console.aws.amazon.com/systems-manager/managed-instances?region=eu-west-2) within the **AWS Systems Manager** console (eu-west-2).
     
-    > You should see an instance named **GuardDuty-Example: Compromised Instance: Scenario 3** with a ping status of **Online**.
+    > You should see an instance named **Security-Workshop: Compromised Instance: Scenario 3** with a ping status of **Online**.
 2.  To see the keys currently active on the instance, click on **Session Manager** on the left navigation and then click **Start Session**.
 3.  To see the credentials currently active on the instance, click on the radio button next to **Compromised Instance: Scenario 3** and click **Start Session**.
 4.  Run the following command in the shell::
@@ -160,18 +160,18 @@ aws iam create-user --user-name Chuck --profile attacker
 ```
 aws dynamodb list-tables --profile attacker
 
-aws dynamodb describe-table --table-name GuardDuty-Example-Customer-DB --profile attacker
+aws dynamodb describe-table --table-name Security-Workshop-Customer-DB --profile attacker
 ```
 
 **Can you query the data?**
 ```
-aws dynamodb scan --table-name GuardDuty-Example-Customer-DB --profile attacker
+aws dynamodb scan --table-name Security-Workshop-Customer-DB --profile attacker
 
-aws dynamodb put-item --table-name GuardDuty-Example-Customer-DB --item '{"name":{"S":"Joshua Tree"},"state":{"S":"Michigan"},"website":{"S":"https://www.nps.gov/yell/index.htm"}}' --profile attacker
+aws dynamodb put-item --table-name Security-Workshop-Customer-DB --item '{"name":{"S":"Joshua Tree"},"state":{"S":"Michigan"},"website":{"S":"https://www.nps.gov/yell/index.htm"}}' --profile attacker
 
-aws dynamodb scan --table-name GuardDuty-Example-Customer-DB --profile attacker
+aws dynamodb scan --table-name Security-Workshop-Customer-DB --profile attacker
 
-aws dynamodb delete-table --table-name GuardDuty-Example-Customer-DB --profile attacker
+aws dynamodb delete-table --table-name Security-Workshop-Customer-DB --profile attacker
 
 aws dynamodb list-tables --profile attacker
 ```
@@ -266,12 +266,12 @@ Next, double check the effects of the remediation to ensure the instance is isol
 
 1.	Browse to the [EC2 console](https://eu-west-2.console.aws.amazon.com/ec2/v2) (eu-west-2) and click **Running Instances**.
    
-    > You should see three instances with names that begin with **GuardDuty-Example**.
+    > You should see three instances with names that begin with **Security-Workshop**.
 
     ![EC2 Instances](images/screenshot9.png "EC2 Instances")
 2.  Click on the instance with the instance ID you saw in the GuardDuty finding or email notifications.
 
-    > **GuardDuty-Example: Compromised Instance: Scenario 1**.  
+    > **Security-Workshop: Compromised Instance: Scenario 1**.  
 
 3.  After reviewing the remediation Lambda Function you know that the instance should now have the Security Group with a name that includes **ForensicSecurityGroup**.  Under the **Description** tab verify the instance has this security group.
 
@@ -331,7 +331,7 @@ Since Alice did not setup a remediation for this finding, you have to manually r
 
 1.  Browse to the [AWS IAM](https://console.aws.amazon.com/iam/home?region=eu-west-2) console.
 2.  Click **Users** in the left navigation.
-3.  Click on the user you identified in the GuardDuty finding and email notifications (**GuardDuty-Example-Compromised-Simulated**).
+3.  Click on the user you identified in the GuardDuty finding and email notifications (**Security-Workshop-Compromised-Simulated**).
 4.  Click the **Security Credentials** tab.
 5.  Under **Access Keys**, find the Access Key ID you identified in the finding and click **Make Inactive**. 
 
@@ -384,7 +384,7 @@ Take a closer look at the **Event Pattern**.  The pattern Alice setup for all th
 
 Alice also set up a remediation for this threat. Look through the Lambda Function code to better understand the remediation.
 
-Go to the [Lambda console](https://eu-west-2.console.aws.amazon.com/lambda/home?) (eu-west-2) and review the function named **GuardDuty-Example-Remediation-InstanceCredentialExfiltration**.
+Go to the [Lambda console](https://eu-west-2.console.aws.amazon.com/lambda/home?) (eu-west-2) and review the function named **Security-Workshop-Remediation-InstanceCredentialExfiltration**.
 
 The Lambda Function retrieves the Role name from the finding details and then attaches an IAM policy that revokes all active sessions for the role.
 
@@ -402,7 +402,7 @@ You should see a response that states that there is an explicit deny for that ac
 
 1.  Browse to the [AWS IAM](https://console.aws.amazon.com/iam/home?region=eu-west-2) console.
 2.  Click **Roles** in the left navigation.
-3.  Click on the Role you identified in the GuardDuty finding and email notifications (**GuardDuty-Example-EC2-Compromised**).
+3.  Click on the Role you identified in the GuardDuty finding and email notifications (**Security-Workshop-EC2-Compromised**).
 4.  Click the **Permissions** tab.
 5.  Click on the **RevokeOldSessions** Policy.
 
@@ -481,7 +481,7 @@ Now that you understand the different components of the GuardDuty service and ho
 To remove the assets created by the CloudFormation, follow these steps: 
 
 1. Delete the S3 buckets that were created by the CloudFormation template (they will have names that begin with **guardduty-example** and **config-example**).  This needs to be done because data was put in the buckets and CloudFormation will not allow you to delete a bucket with data in it.
-2. Delete the compromised instance IAM Role (it will have the name **GuardDuty-Example-EC2-Compromised**). Because one of the Lambda functions added an additional policy to this Role you need to manually delete this.
+2. Delete the compromised instance IAM Role (it will have the name **Security-Workshop-EC2-Compromised**). Because one of the Lambda functions added an additional policy to this Role you need to manually delete this.
 3. Delete the custom Threat List within GuardDuty.  Within the GuardDuty console click **Lists** in the left navigation.  From there delete the **Example-Threat-List**.
 4. Disable GuardDuty (if you didn't have it enabled already).  Within the GuardDuty console click **Settings**. Then check the box to **Disable GuardDuty** and save.
 
