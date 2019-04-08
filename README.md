@@ -160,18 +160,18 @@ aws iam create-user --user-name Chuck --profile attacker
 ```
 aws dynamodb list-tables --profile attacker
 
-aws dynamodb describe-table --table-name Security-Workshop-Customer-DB --profile attacker
+aws dynamodb describe-table --table-name GuardDuty-Example-Customer-DB --profile attacker
 ```
 
 **Can you query the data?**
 ```
-aws dynamodb scan --table-name Security-Workshop-Customer-DB --profile attacker
+aws dynamodb scan --table-name GuardDuty-Example-Customer-DB --profile attacker
 
-aws dynamodb put-item --table-name Security-Workshop-Customer-DB --item '{"name":{"S":"Joshua Tree"},"state":{"S":"Michigan"},"website":{"S":"https://www.nps.gov/yell/index.htm"}}' --profile attacker
+aws dynamodb put-item --table-name GuardDuty-Example-Customer-DB --item '{"name":{"S":"Joshua Tree"},"state":{"S":"Michigan"},"website":{"S":"https://www.nps.gov/yell/index.htm"}}' --profile attacker
 
-aws dynamodb scan --table-name Security-Workshop-Customer-DB --profile attacker
+aws dynamodb scan --table-name GuardDuty-Example-Customer-DB --profile attacker
 
-aws dynamodb delete-table --table-name Security-Workshop-Customer-DB --profile attacker
+aws dynamodb delete-table --table-name GuardDuty-Example-Customer-DB --profile attacker
 
 aws dynamodb list-tables --profile attacker
 ```
@@ -448,7 +448,7 @@ Follow the next steps in order to create the alarm.
 
 1. On the Create new alarm page, verify that the information to the right of the graph shows that the period is set as 1 minute and the statistic is Sum. 
 2. Give the Alarm a name, in this case use HTTP 4XX errors and a suitable description. 
-3. Use a small number of measurements in order to ensure the alarm triggers sooner for demonstration purposes however in normal practice we would be selecting a prolonged period of measurement to avoid false alarms. Use >=40 for 1 out of 1 datapoints (this means that the alarm should trigger after 1 measurement above 40).
+3. Use a small number of measurements in order to ensure the alarm triggers sooner for demonstration purposes however in normal practice we would be selecting a prolonged period of measurement to avoid false alarms. Use >=65 for 1 out of 1 datapoints (this means that the alarm should trigger after 1 measurement above 65).
 4. Treat missing data as good (not breaching threshold). This ensures that the alarm will go back to a good status for normal operation. 
 5. For actions, whenever state is Alarm, Choose the security-Config topic as the notification target. The email address provided should autopopulate. 
 6. Click on +Notification
