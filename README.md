@@ -8,7 +8,7 @@ The CloudFormation template also includes a set of servers for use to simulate a
 
 * **AWS Account**: Given that you will be simulating attacks and doing remediations, you should run this in a non-production account. After running through these scenarios, you can look at how you can implement GuardDuty and associated automated remediation workflows in a multi-account structure so you are able to aggregate findings from other accounts and use the service in a more scalable manner. 
 * **Admin privileges**: Ensure you are using an AWS IAM User with Admin privileges.
-* **AWS CLI**: You will be using the AWS CLI for simulating one of the attacks so be sure you have installed on your local machine.
+* **AWS CLI**: You will be using the AWS CLI for simulating one of the attacks so be sure you have installed on your local machine. (https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 * **SSH Key**: The preferred method for interacting with the servers that are deployed is the Session Manager within Systems Manager however if Websockets are not available then direct access over SSH should be used instead. 
 
 ### Table of Contents
