@@ -423,11 +423,11 @@ Go to [CloudWatch Logs](https://eu-west-2.console.aws.amazon.com/cloudwatch/home
 We would like to create an alarm for when the instances are receiving a large number of 404s as this could indicate someone attempting to look for exploits on the system. To do this we need to create a metric first that can be used to look for events. 
 
 1. Click on Log Groups at the top of the screen again to go back to the list of Log Groups. 
-2. Click the radio button next to **/securitydemo/httpd/access**
-3. Click the blue **Create Metric Filter** Button
+2. Click the check box  next to **/securitydemo/httpd/access**
+3. Click on **Actions** and select **Create Metric Filter** from the dropdown menu
 4. On the next page, this is where the pattern being searched for is defined. 
 5. Under Filter patterns click on the **Show Examples** link 
-6. Click on the **[host, logName, user, timestamp, request, statusCode=4*, size]** example. This will prepopulate the Filter pattern. 
+6. Click on the **[host, logName, user, timestamp, request, statusCode=4\*, size]** example. This will prepopulate the Filter pattern. 
 7. Sample data from an instance can be reviewed and the patten can be tested by using the **Test Pattern** button. Under the sample data it will indicate how many records have been found. 
 8. Click on **Show test results** to display the log entries identified by the filter. 
 9. Click on **Assign Metric** to move to the next stage.
